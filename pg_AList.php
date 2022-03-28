@@ -13,14 +13,31 @@
     </label>
     <nav>
         <ul>
-            <li><a href="./pg_summary.php">HOME</a></li>
-            <li><a href="./pg Profile.php">Profile</a></li>
+            <li><a href="./index.php">HOME</a></li>
+            <?php
+            include('Login.php');
+            $log = Login::isLogged();
+            if($log){ 
+                echo '<li><a href="pg_usuario.php">Profile</a></li>';
+            } else {
+                echo '<li><a href="pg Profile.php">Profile</a></li>';
+            }
+            ?>
             <li><a href="./pg_AList.php">Anime List</a></li>
             <li><a href="./top_A.php">Top of the Season</a></li>
-            <li><a href="./top_usuario.php">Pagina Usuario</a></li>
         </ul>
     </nav>
-    <div class="head"></div>
+    <div class="head" align="right">
+    <?php
+            $log = Login::isLogged();
+            if($log){ 
+                echo '
+                <form class="form" action="loggout.php" method="post">
+                <input type="submit" id="logout"  value="Loggout">
+                </form>';
+            }
+    ?>
+    </div>
     <div class="body">
         <div class="animeList">
         <button class="anime" onclick="window.location.href = 'https://pt.wikipedia.org/wiki/One_Piece'"><img
@@ -52,11 +69,17 @@
         </div>
         <a href="https://www.crunchyroll.com/pt-br/videos/anime">Imagens e conteúdo utilizado como base</a>
     </div>
-    <footer>
-        <div class="foot">
-            <a class="foot" href="./pg Profile.php">Entre ou crie sua conta.</a>
-        </div>
-    </footer>
+    <?php
+        $log = Login::isLogged();
+        if($log){ 
+        } else {
+            echo '<footer>
+            <div class="foot">
+                <a class="foot" href="./pg Profile.php">Entre ou crie sua conta.</a>
+            </div>
+            </footer>';
+        }
+    ?>
 </body>
 
 </html>

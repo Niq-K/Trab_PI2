@@ -1,11 +1,13 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="./estilo.css">
-  <link rel="stylesheet" href="./bootstrap-5.0.0-beta1-dist/css/bootstrap.min.css">
-  <script src="./jquery-3.6.0.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<meta charset="utf-8">
+  <link rel="stylesheet" href="estilo.css">
+  <link href="bootstrap-5.0.0-beta1-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <script src="./js/jquery-3.2.1.slim.min.js"></script>
+  <script src="./js/popper.min.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
 
 
   <title>Anime World</title>
@@ -18,14 +20,31 @@
   </label>
   <nav>
     <ul>
-      <li><a href="./pg_summary.php">HOME</a></li>
-      <li><a href="./pg Profile.php">Profile</a></li>
+      <li><a href="./index.php">HOME</a></li>
+      <?php
+            include('Login.php');
+            $log = Login::isLogged();
+            if($log){ 
+                echo '<li><a href="pg_usuario.php">Profile</a></li>';
+            } else {
+                echo '<li><a href="pg Profile.php">Profile</a></li>';
+            }
+      ?>
       <li><a href="./pg_AList.php">Anime List</a></li>
       <li><a href="./top_A.php">Top of the Season</a></li>
-      <li><a href="./top_usuario.php">Pagina Usuario</a></li>
     </ul>
   </nav>
-  <div class="head"></div>
+  <div class="head" align="right">
+    <?php
+            $log = Login::isLogged();
+            if($log){ 
+                echo '
+                <form class="form" action="loggout.php" method="post">
+                <input type="submit" id="logout"  value="Loggout">
+                </form>';
+            }
+    ?>
+    </div>
   <div class="body">
     <br>
     <center>
@@ -36,17 +55,17 @@
         <div class="carousel-inner">
           <div class="carousel-item active">
             <img class="d-block w-100"
-              src="./one_piece_c1.png" width="500px"
+              src="./carrosel/one_piece_c1.png" width="500px"
               height="600px" alt="Primeiro Slide">
           </div>
           <div class="carousel-item">
             <img class="d-block w-100"
-              src="./one_piece_c2.jpeg"
+              src="./carrosel/one_piece_c2.jpeg"
               width="500px" height="600px" alt="Segundo Slide">
           </div>
           <div class="carousel-item">
             <img class="d-block w-100"
-              src="./one_piece_c3.jpeg"
+              src="./carrosel/one_piece_c3.jpeg"
               width="500px" height="600px" alt="Terceiro Slide">
           </div>
         </div>
@@ -86,17 +105,17 @@
       <div id="carousel2" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="d-block w-100" src="https://www.animeunited.com.br/oomtumtu/2021/03/1-17.jpg" width="500px"
+            <img class="d-block w-100" src="./carrosel/slime_c1.jpg" width="500px"
               height="600px" alt="Primeiro Slide">
           </div>
           <div class="carousel-item">
             <img class="d-block w-100"
-              src="https://criticalhits.com.br/wp-content/uploads/2021/09/xzjZDyqUobuJtkBljhgLH4Fdnye.jpg" width="500px"
+              src="./carrosel/slime_c2.jpg" width="500px"
               height="600px" alt="Segundo Slide">
           </div>
           <div class="carousel-item">
             <img class="d-block w-100"
-              src="https://www.animesxis.com.br/wp-content/uploads/2021/03/That-Time-I-Got-Reincarnated-as-a-Slime-tensura-image-1.jpg"
+              src="./carrosel/slime_c3.jpg"
               width="500px" height="600px" alt="Terceiro Slide">
           </div>
         </div>
@@ -132,18 +151,13 @@
         <div class="carousel-inner">
           <div class="carousel-item active">
             <img class="d-block w-100"
-              src="https://ptanime.com/wp-content/uploads/2021/02/Tokyo-Revengers-anime-1st-full-video-promo-pv-screenshot-v2.jpg"
+              src="./carrosel/tr_c1.jpg"
               width="500px" height="600px" alt="Primeiro Slide">
           </div>
           <div class="carousel-item">
             <img class="d-block w-100"
-              src="https://criticalhits.com.br/wp-content/uploads/2021/07/Tokyo-Revengers-suastica-2.jpg" width="500px"
+              src="./carrosel/tr_c2.jpg" width="500px"
               height="600px" alt="Segundo Slide">
-          </div>
-          <div class="carousel-item">
-            <img class="d-block w-100"
-              src="https://i2.wp.com/mangekyou.blog.br/wp-content/uploads/2021/06/Tokyo-Revengers.jpg?fit=1170%2C614&ssl=1"
-              width="500px" height="600px" alt="Terceiro Slide">
           </div>
         </div>
         <a class="carousel-control-prev" href="#carousel3" role="button" data-slide="prev">
@@ -172,11 +186,17 @@
       </div>
     </center>
   </div>
-    <footer>
-        <div class="foot">
-            <a class="foot" href="./pg Profile.php">Entre ou crie sua conta.</a>
-        </div>
-    </footer>
+  <?php
+        $log = Login::isLogged();
+        if($log){ 
+        } else {
+            echo '<footer>
+            <div class="foot">
+                <a class="foot" href="./pg Profile.php">Entre ou crie sua conta.</a>
+            </div>
+            </footer>';
+        }
+  ?>
 </body>
 
 </html>

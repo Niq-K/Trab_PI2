@@ -173,3 +173,20 @@ div.animeList{
     justify-content: center;
     align-items: center;
 }
+input#logout{
+    height: 50px;
+    background-color: skyblue;
+    border: 4mm;
+    font-family: cursive;
+    font-size: large;
+}
+input#outro[type="checkbox"]
+{
+    display:inline;
+    width: 45px;
+    height: 15px;
+    background: #555;
+    margin: 20px 80px;
+    position: relative;
+    border-radius: 5px;
+}
